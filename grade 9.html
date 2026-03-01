@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Discovery Assessment | NextGen NTS</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .sub-tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .assessment-section {
+            display: none;
+        }
+        
+        .active-section {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .question-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .question-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .question-title {
+            color: #1a3a5f;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .question-instruction {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .question-subinstruction {
+            color: #888;
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(to right, transparent, #2c5282, transparent);
+            margin: 25px 0;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .option-card {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: #2c5282;
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.1);
+        }
+        
+        .option-card.selected {
+            border-color: #2c5282;
+            background-color: #e6f0ff;
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.15);
+        }
+        
+        .option-title {
+            color: #1a3a5f;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-icon {
+            margin-right: 12px;
+            font-size: 1.3rem;
+            color: #2c5282;
+        }
+        
+        .option-description {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-btn {
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #2c5282 0%, #1a3a5f 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(44, 82, 130, 0.3);
+        }
+        
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+        
+        .nav-btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+        
+        .progress-container {
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2c5282, #4a9eff);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .results-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+        
+        .results-title {
+            color: #1a3a5f;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .career-match-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 8px solid #2c5282;
+        }
+        
+        .career-match-title {
+            color: #1a3a5f;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .career-match-description {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .career-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .career-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .subject-recommendations {
+            margin-top: 40px;
+        }
+        
+        .section-title {
+            color: #1a3a5f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .subject-category {
+            margin-bottom: 30px;
+        }
+        
+        .category-title {
+            color: #2c5282;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .subject-card {
+            background-color: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 4px solid #2c5282;
+            transition: transform 0.3s ease;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .subject-name {
+            font-weight: 600;
+            color: #1a3a5f;
+            margin-bottom: 8px;
+        }
+        
+        .subject-type {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .required {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .recommended {
+            color: #17a2b8;
+        }
+        
+        .elective {
+            color: #6c757d;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #2c5282 0%, #1a3a5f 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(44, 82, 130, 0.3);
+        }
+        
+        .action-btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+        
+        .action-btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        
+        .footer {
+            background-color: #1a3a5f;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #e9ecef;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+            color: #b0b7c3;
+        }
+        
+        .contact-info {
+            margin-top: 10px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            color: #4a9eff;
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .results-section,
+            .results-section * {
+                visibility: visible;
+            }
+            .results-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: 100%;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+            }
+            .action-buttons,
+            .footer {
+                display: none;
+            }
+            .career-match-card,
+            .subject-category {
+                break-inside: avoid;
+            }
+            .subject-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .question-card {
+                padding: 25px 20px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-btn {
+                width: 100%;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .action-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <h1>Helping You Find Yourself</h1>
+            <p class="tagline">A comprehensive career discovery assessment based on psychology, personality traits, and South African context</p>
+            <p class="sub-tagline">Answer 20 questions to discover your ideal career path and required subjects</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="container progress-container" id="progressContainer">
+        <div class="progress-text">
+            <span>Question <span id="currentQuestion">1</span> of 20</span>
+            <span><span id="progressPercent">5%</span> Complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <!-- Assessment Questions -->
+    <div id="assessmentContainer">
+        <!-- Questions will be dynamically inserted here -->
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="resultsSection">
+        <h2 class="results-title">Your Career Discovery Results</h2>
+
+        <div id="careerResults">
+            <!-- Career results will be displayed here -->
+        </div>
+
+        <div class="subject-recommendations">
+            <h3 class="section-title">Recommended Subjects for Your Career Path</h3>
+
+            <div id="subjectRecommendations">
+                <!-- Subject recommendations will be displayed here -->
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="mark analysis.html" class="action-btn" id="marksAnalysisBtn">
+                <i class="fas fa-chart-line"></i> Check Your Marks Analysis
+            </a>
+            <button class="action-btn action-btn-success" id="downloadBtn">
+                <i class="fas fa-download"></i> Download/Print Results
+            </button>
+            <button class="action-btn action-btn-secondary" id="retakeBtn">
+                <i class="fas fa-redo"></i> Retake Assessment
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>NextGen NTS</h3>
+                <p>A comprehensive career guidance platform for South African students.</p>
+                <p>Helping Grade 9 students make informed subject choices for their future careers.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Questions?</h3>
+                <p>Contact NextGen NTS for support or additional guidance.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-clock"></i> Office Hours: Mon-Fri: 11:00AM-17:00PM</p>
+                    <p><i class="fas fa-phone"></i> Phone: 064 054 4020</p>
+                    <p><i class="fas fa-envelope"></i> Email: nexttiersystems@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Career categories and related subjects
+        const careerCategories = {
+            stem: {
+                name: "STEM (Science, Technology, Engineering, Mathematics)",
+                description: "You enjoy logical thinking, problem-solving, and working with systems, data, and technology. You're likely curious about how things work and enjoy finding solutions to complex challenges.",
+                careers: [
+                    "Software Developer", "Data Scientist", "Engineer (Various Fields)",
+                    "Architect", "Doctor/Medical Specialist", "Research Scientist",
+                    "Biotechnologist", "Statistician", "Aerospace Engineer",
+                    "Robotics Engineer", "Cybersecurity Analyst", "Chemical Engineer"
+                ],
+                requiredSubjects: [{
+                    name: "MATHEMATICS",
+                    type: "required"
+                }, {
+                    name: "PHYSICAL SCIENCES",
+                    type: "required"
+                }, {
+                    name: "LIFE SCIENCES",
+                    type: "required"
+                }, {
+                    name: "INFORMATION TECHNOLOGY",
+                    type: "required"
+                }, {
+                    name: "COMPUTER APPLICATIONS TECHNOLOGY",
+                    type: "required"
+                }],
+                recommendedSubjects: [{
+                    name: "ENGINEERING GRAPHICS AND DESIGN",
+                    type: "recommended"
+                }, {
+                    name: "TECHNICAL SCIENCES",
+                    type: "recommended"
+                }, {
+                    name: "TECHNICAL MATHEMATICS",
+                    type: "recommended"
+                }, {
+                    name: "MARINE SCIENCES",
+                    type: "elective"
+                }, {
+                    name: "AGRICULTURAL SCIENCES",
+                    type: "elective"
+                }],
+                electiveSubjects: [{
+                    name: "VISUAL ARTS",
+                    type: "elective"
+                }, {
+                    name: "MUSIC",
+                    type: "elective"
+                }, {
+                    name: "DRAMATIC ARTS",
+                    type: "elective"
+                }, {
+                    name: "HISTORY",
+                    type: "elective"
+                }, {
+                    name: "GEOGRAPHY",
+                    type: "elective"
+                }]
+            },
+            business: {
+                name: "Business, Finance & Management",
+                description: "You're interested in how organizations work, managing resources, making strategic decisions, and understanding economic systems. You likely have good organizational skills and an interest in commerce.",
+                careers: [
+                    "Accountant", "Financial Analyst", "Business Manager", "Entrepreneur",
+                    "Marketing Manager", "Economist", "Investment Banker", "Human Resources Manager",
+                    "Project Manager", "Supply Chain Manager", "Management Consultant", "Actuary"
+                ],
+                requiredSubjects: [{
+                    name: "MATHEMATICS",
+                    type: "required"
+                }, {
+                    name: "ACCOUNTING",
+                    type: "required"
+                }, {
+                    name: "BUSINESS STUDIES",
+                    type: "required"
+                }, {
+                    name: "ECONOMICS",
+                    type: "required"
+                }],
+                recommendedSubjects: [{
+                    name: "MATHEMATICAL LITERACY",
+                    type: "recommended"
+                }, {
+                    name: "CONSUMER STUDIES",
+                    type: "recommended"
+                }, {
+                    name: "TOURISM",
+                    type: "recommended"
+                }, {
+                    name: "HOSPITALITY STUDIES",
+                    type: "elective"
+                }],
+                electiveSubjects: [{
+                    name: "HISTORY",
+                    type: "elective"
+                }, {
+                    name: "GEOGRAPHY",
+                    type: "elective"
+                }, {
+                    name: "LIFE SCIENCES",
+                    type: "elective"
+                }, {
+                    name: "PHYSICAL SCIENCES",
+                    type: "elective"
+                }, {
+                    name: "DRAMATIC ARTS",
+                    type: "elective"
+                }]
+            },
+            humanities: {
+                name: "Humanities & Social Sciences",
+                description: "You're curious about human behavior, society, communication, history, and helping others. You likely enjoy reading, writing, and understanding different perspectives and cultures.",
+                careers: [
+                    "Psychologist", "Social Worker", "Journalist", "Lawyer",
+                    "Historian", "Teacher/Lecturer", "Sociologist", "Political Scientist",
+                    "Archaeologist", "Librarian", "Writer/Author", "Diplomat"
+                ],
+                requiredSubjects: [{
+                    name: "HISTORY",
+                    type: "required"
+                }, {
+                    name: "GEOGRAPHY",
+                    type: "required"
+                }, {
+                    name: "LIFE SCIENCES",
+                    type: "required"
+                }, {
+                    name: "ENGLISH HL",
+                    type: "required"
+                }],
+                recommendedSubjects: [{
+                    name: "RELIGION STUDIES",
+                    type: "recommended"
+                }, {
+                    name: "DRAMATIC ARTS",
+                    type: "recommended"
+                }, {
+                    name: "VISUAL ARTS",
+                    type: "recommended"
+                }, {
+                    name: "MUSIC",
+                    type: "elective"
+                }, {
+                    name: "ADDITIONAL LANGUAGE (FAL)",
+                    type: "elective"
+                }],
+                electiveSubjects: [{
+                    name: "MATHEMATICS",
+                    type: "elective"
+                }, {
+                    name: "MATHEMATICAL LITERACY",
+                    type: "elective"
+                }, {
+                    name: "PHYSICAL SCIENCES",
+                    type: "elective"
+                }, {
+                    name: "BUSINESS STUDIES",
+                    type: "elective"
+                }, {
+                    name: "CONSUMER STUDIES",
+                    type: "elective"
+                }]
+            },
+            creative: {
+                name: "Creative Arts & Design",
+                description: "You have a strong imagination, enjoy creative expression, and appreciate aesthetics. You likely think visually and enjoy bringing ideas to life through various forms of artistic expression.",
+                careers: [
+                    "Graphic Designer", "Architect", "Film Director", "Musician",
+                    "Fashion Designer", "Animator", "Interior Designer", "Photographer",
+                    "Art Director", "Game Designer", "Performance Artist", "Creative Writer"
+                ],
+                requiredSubjects: [{
+                    name: "VISUAL ARTS",
+                    type: "required"
+                }, {
+                    name: "DRAMATIC ARTS",
+                    type: "required"
+                }, {
+                    name: "MUSIC",
+                    type: "required"
+                }, {
+                    name: "DESIGN",
+                    type: "required"
+                }],
+                recommendedSubjects: [{
+                    name: "DANCE",
+                    type: "recommended"
+                }, {
+                    name: "CONSUMER STUDIES",
+                    type: "recommended"
+                }, {
+                    name: "TOURISM",
+                    type: "recommended"
+                }, {
+                    name: "HOSPITALITY STUDIES",
+                    type: "elective"
+                }],
+                electiveSubjects: [{
+                    name: "HISTORY",
+                    type: "elective"
+                }, {
+                    name: "GEOGRAPHY",
+                    type: "elective"
+                }, {
+                    name: "BUSINESS STUDIES",
+                    type: "elective"
+                }, {
+                    name: "LIFE SCIENCES",
+                    type: "elective"
+                }, {
+                    name: "MATHEMATICAL LITERACY",
+                    type: "elective"
+                }]
+            },
+            services: {
+                name: "Services, Hospitality & Helping Professions",
+                description: "You enjoy working with people, providing services, and ensuring others have great experiences. You're likely empathetic, patient, and enjoy making a positive difference in people's lives.",
+                careers: [
+                    "Chef", "Hotel Manager", "Event Planner", "Tour Guide",
+                    "Flight Attendant", "Sports Coach", "Nurse", "Police Officer",
+                    "Firefighter", "Paramedic", "Counsellor", "Fitness Instructor"
+                ],
+                requiredSubjects: [{
+                    name: "TOURISM",
+                    type: "required"
+                }, {
+                    name: "HOSPITALITY STUDIES",
+                    type: "required"
+                }, {
+                    name: "CONSUMER STUDIES",
+                    type: "required"
+                }, {
+                    name: "SPORT AND EXERCISE SCIENCE",
+                    type: "required"
+                }],
+                recommendedSubjects: [{
+                    name: "BUSINESS STUDIES",
+                    type: "recommended"
+                }, {
+                    name: "LIFE SCIENCES",
+                    type: "recommended"
+                }, {
+                    name: "LIFE ORIENTATION",
+                    type: "recommended"
+                }, {
+                    name: "DRAMATIC ARTS",
+                    type: "elective"
+                }],
+                electiveSubjects: [{
+                    name: "MATHEMATICAL LITERACY",
+                    type: "elective"
+                }, {
+                    name: "HISTORY",
+                    type: "elective"
+                }, {
+                    name: "GEOGRAPHY",
+                    type: "elective"
+                }, {
+                    name: "VISUAL ARTS",
+                    type: "elective"
+                }, {
+                    name: "MUSIC",
+                    type: "elective"
+                }]
+            }
+        };
+
+        // 20 comprehensive questions
+        const questionnaire = [{
+            id: 1,
+            title: "Academic Foundation",
+            instruction: "Looking back at your high school years in South Africa, which subject did you genuinely enjoy and look forward to?",
+            subinstruction: "Consider the South African CAPS curriculum subjects you took",
+            options: [{
+                title: "Mathematics or Physical Sciences",
+                description: "I loved solving complex problems and understanding how things work scientifically",
+                icon: "fas fa-calculator",
+                value: "stem"
+            }, {
+                title: "Languages (English, Afrikaans, indigenous languages)",
+                description: "I enjoyed reading, writing, communication and exploring different cultures through language",
+                icon: "fas fa-language",
+                value: "humanities"
+            }, {
+                title: "Humanities (History, Geography, Life Orientation)",
+                description: "Understanding people, societies and the world around us fascinated me",
+                icon: "fas fa-globe-africa",
+                value: "humanities"
+            }, {
+                title: "Business Studies, Economics, Accounting",
+                description: "The world of commerce, money management and how businesses work intrigued me",
+                icon: "fas fa-chart-line",
+                value: "business"
+            }, {
+                title: "Creative Arts, Dramatic Arts, Music",
+                description: "Expressing creativity through art, performance or music was fulfilling",
+                icon: "fas fa-palette",
+                value: "creative"
+            }, {
+                title: "Computer Applications Technology, IT",
+                description: "Technology, digital systems and working with computers excited me",
+                icon: "fas fa-laptop-code",
+                value: "stem"
+            }]
+        }, {
+            id: 2,
+            title: "Intrinsic Motivation",
+            instruction: "When you have free time and no obligations, what type of activities do you naturally gravitate toward?",
+            subinstruction: "Think about what you do when you can choose anything",
+            options: [{
+                title: "Creative expression",
+                description: "Drawing, writing, making music, crafting, or designing things",
+                icon: "fas fa-paint-brush",
+                value: "creative"
+            }, {
+                title: "Problem-solving activities",
+                description: "Puzzles, strategy games, researching topics deeply, or coding",
+                icon: "fas fa-puzzle-piece",
+                value: "stem"
+            }, {
+                title: "Social connection",
+                description: "Meeting friends, community activities, helping others, or volunteering",
+                icon: "fas fa-users",
+                value: "services"
+            }, {
+                title: "Hands-on work",
+                description: "Building, fixing, gardening, DIY projects, or cooking",
+                icon: "fas fa-tools",
+                value: "services"
+            }, {
+                title: "Organizing and planning",
+                description: "Arranging things, creating systems, event planning, or managing projects",
+                icon: "fas fa-tasks",
+                value: "business"
+            }, {
+                title: "Outdoor activities",
+                description: "Sports, hiking, exploring nature, adventure, or exercise",
+                icon: "fas fa-hiking",
+                value: "services"
+            }]
+        }, {
+            id: 3,
+            title: "Learning Style",
+            instruction: "How do you prefer to learn new things or gain new skills?",
+            subinstruction: "Everyone has different ways of learning effectively",
+            options: [{
+                title: "Hands-on practice",
+                description: "I learn best by doing things myself and learning from experience",
+                icon: "fas fa-hands",
+                value: "services"
+            }, {
+                title: "Reading and research",
+                description: "I enjoy reading books, articles, and doing my own research",
+                icon: "fas fa-book-reader",
+                value: "humanities"
+            }, {
+                title: "Visual demonstrations",
+                description: "I prefer watching videos, diagrams, or visual explanations",
+                icon: "fas fa-eye",
+                value: "creative"
+            }, {
+                title: "Logical step-by-step",
+                description: "I like clear instructions, procedures, and systematic approaches",
+                icon: "fas fa-list-ol",
+                value: "stem"
+            }, {
+                title: "Group discussion",
+                description: "I learn best through conversation, debate, and exchanging ideas",
+                icon: "fas fa-comments",
+                value: "humanities"
+            }, {
+                title: "Trial and error",
+                description: "I prefer experimenting and figuring things out through practice",
+                icon: "fas fa-flask",
+                value: "stem"
+            }]
+        }, {
+            id: 4,
+            title: "Work Environment Preference",
+            instruction: "What type of work environment do you imagine yourself thriving in?",
+            subinstruction: "Think about where you'd feel most productive and happy",
+            options: [{
+                title: "Laboratory or technical workshop",
+                description: "A space with equipment, tools, and technology for experiments",
+                icon: "fas fa-flask",
+                value: "stem"
+            }, {
+                title: "Office with regular structure",
+                description: "A professional office environment with clear routines",
+                icon: "fas fa-building",
+                value: "business"
+            }, {
+                title: "Outdoors or changing locations",
+                description: "Working outside or in different places rather than one fixed location",
+                icon: "fas fa-mountain",
+                value: "services"
+            }, {
+                title: "Creative studio or performance space",
+                description: "A space designed for artistic work, design, or performance",
+                icon: "fas fa-theater-masks",
+                value: "creative"
+            }, {
+                title: "Helping people directly",
+                description: "Working in hospitals, schools, community centers helping others",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "Research library or quiet study",
+                description: "A quiet space for deep thinking, reading, and analysis",
+                icon: "fas fa-university",
+                value: "humanities"
+            }]
+        }, {
+            id: 5,
+            title: "Problem-Solving Approach",
+            instruction: "When faced with a challenging problem, what is your first instinct?",
+            subinstruction: "How do you naturally approach difficulties?",
+            options: [{
+                title: "Analyze logically",
+                description: "Break it down into logical steps and find a systematic solution",
+                icon: "fas fa-brain",
+                value: "stem"
+            }, {
+                title: "Consider people's feelings",
+                description: "Think about how it affects people and find a compassionate solution",
+                icon: "fas fa-heart",
+                value: "humanities"
+            }, {
+                title: "Get creative",
+                description: "Look for an unconventional or creative way to solve it",
+                icon: "fas fa-lightbulb",
+                value: "creative"
+            }, {
+                title: "Find practical solutions",
+                description: "Look for the most practical and efficient way to fix it",
+                icon: "fas fa-wrench",
+                value: "services"
+            }, {
+                title: "Consult with others",
+                description: "Talk to people who might have experience with similar problems",
+                icon: "fas fa-user-friends",
+                value: "humanities"
+            }, {
+                title: "Research and plan",
+                description: "Look up information and create a detailed plan before acting",
+                icon: "fas fa-search",
+                value: "business"
+            }]
+        }, {
+            id: 6,
+            title: "Team Role Preference",
+            instruction: "In a group project or team activity, what role do you naturally take?",
+            subinstruction: "Think about school projects or group activities",
+            options: [{
+                title: "The organizer/planner",
+                description: "I like creating timelines, assigning tasks, and keeping everyone on track",
+                icon: "fas fa-calendar-check",
+                value: "business"
+            }, {
+                title: "The creative idea person",
+                description: "I come up with innovative ideas and creative solutions",
+                icon: "fas fa-lightbulb",
+                value: "creative"
+            }, {
+                title: "The technical expert",
+                description: "I handle the technical aspects, calculations, or complex parts",
+                icon: "fas fa-cogs",
+                value: "stem"
+            }, {
+                title: "The communicator",
+                description: "I facilitate discussion, resolve conflicts, and ensure good communication",
+                icon: "fas fa-comments",
+                value: "humanities"
+            }, {
+                title: "The helper/supporter",
+                description: "I assist others, take care of practical needs, and keep morale high",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "The researcher",
+                description: "I gather information, facts, and data to inform our decisions",
+                icon: "fas fa-search",
+                value: "humanities"
+            }]
+        }, {
+            id: 7,
+            title: "Future Vision",
+            instruction: "When you imagine your future career, what matters most to you?",
+            subinstruction: "What would make you feel fulfilled in your work?",
+            options: [{
+                title: "Making a difference",
+                description: "Helping people, contributing to society, or making the world better",
+                icon: "fas fa-hand-holding-heart",
+                value: "services"
+            }, {
+                title: "Creative expression",
+                description: "Having opportunities to express myself creatively through my work",
+                icon: "fas fa-paint-brush",
+                value: "creative"
+            }, {
+                title: "Intellectual challenge",
+                description: "Solving complex problems and continuously learning new things",
+                icon: "fas fa-puzzle-piece",
+                value: "stem"
+            }, {
+                title: "Financial success",
+                description: "Earning a good income and achieving financial security",
+                icon: "fas fa-money-check-alt",
+                value: "business"
+            }, {
+                title: "Understanding people",
+                description: "Gaining insights into human behavior, culture, or society",
+                icon: "fas fa-user-friends",
+                value: "humanities"
+            }, {
+                title: "Work-life balance",
+                description: "Having time for family, hobbies, and personal life alongside work",
+                icon: "fas fa-balance-scale",
+                value: "services"
+            }]
+        }, {
+            id: 8,
+            title: "Stress Response",
+            instruction: "How do you typically handle stressful situations or pressure?",
+            subinstruction: "Everyone deals with stress differently",
+            options: [{
+                title: "Create a plan",
+                description: "I make lists, organize tasks, and create a step-by-step plan",
+                icon: "fas fa-tasks",
+                value: "business"
+            }, {
+                title: "Analyze the situation",
+                description: "I break down the problem logically to find the best solution",
+                icon: "fas fa-search",
+                value: "stem"
+            }, {
+                title: "Talk to others",
+                description: "I seek support from friends, family, or colleagues",
+                icon: "fas fa-comments",
+                value: "humanities"
+            }, {
+                title: "Take practical action",
+                description: "I focus on what I can do right now to improve the situation",
+                icon: "fas fa-hammer",
+                value: "services"
+            }, {
+                title: "Express creatively",
+                description: "I channel stress into creative outlets like art, music, or writing",
+                icon: "fas fa-music",
+                value: "creative"
+            }, {
+                title: "Take a break",
+                description: "I step back temporarily to gain perspective before acting",
+                icon: "fas fa-coffee",
+                value: "humanities"
+            }]
+        }, {
+            id: 9,
+            title: "Communication Style",
+            instruction: "How do you prefer to communicate with others?",
+            subinstruction: "Think about how you express yourself best",
+            options: [{
+                title: "Writing",
+                description: "I express myself best through writing emails, reports, or documents",
+                icon: "fas fa-pen-fancy",
+                value: "humanities"
+            }, {
+                title: "Visual presentation",
+                description: "I prefer using charts, diagrams, or visual aids to communicate",
+                icon: "fas fa-chart-bar",
+                value: "creative"
+            }, {
+                title: "Verbal discussion",
+                description: "I enjoy face-to-face conversations, meetings, and discussions",
+                icon: "fas fa-comment-dots",
+                value: "humanities"
+            }, {
+                title: "Technical documentation",
+                description: "I prefer clear, precise instructions, manuals, or specifications",
+                icon: "fas fa-file-alt",
+                value: "stem"
+            }, {
+                title: "Demonstration",
+                description: "I'd rather show someone how to do something than explain it",
+                icon: "fas fa-chalkboard-teacher",
+                value: "services"
+            }, {
+                title: "Formal presentation",
+                description: "I'm comfortable giving structured presentations to groups",
+                icon: "fas fa-presentation",
+                value: "business"
+            }]
+        }, {
+            id: 10,
+            title: "Success Measurement",
+            instruction: "How do you personally define success in your work or studies?",
+            subinstruction: "What makes you feel like you've done well?",
+            options: [{
+                title: "Solving difficult problems",
+                description: "Success is finding solutions to challenging or complex problems",
+                icon: "fas fa-check-circle",
+                value: "stem"
+            }, {
+                title: "Positive feedback from others",
+                description: "Success is when people appreciate and value my work",
+                icon: "fas fa-award",
+                value: "services"
+            }, {
+                title: "Creative accomplishment",
+                description: "Success is creating something original, beautiful, or meaningful",
+                icon: "fas fa-trophy",
+                value: "creative"
+            }, {
+                title: "Meeting goals and targets",
+                description: "Success is achieving specific objectives and meeting deadlines",
+                icon: "fas fa-bullseye",
+                value: "business"
+            }, {
+                title: "Personal growth",
+                description: "Success is learning, developing new skills, and improving myself",
+                icon: "fas fa-seedling",
+                value: "humanities"
+            }, {
+                title: "Making an impact",
+                description: "Success is knowing my work makes a real difference to others",
+                icon: "fas fa-handshake",
+                value: "services"
+            }]
+        }, {
+            id: 11,
+            title: "School Project Preference",
+            instruction: "What type of school project do you enjoy working on the most?",
+            subinstruction: "Think about assignments you've actually enjoyed",
+            options: [{
+                title: "Science experiments",
+                description: "Projects involving testing hypotheses, collecting data, and analyzing results",
+                icon: "fas fa-vial",
+                value: "stem"
+            }, {
+                title: "Creative presentations",
+                description: "Projects where I can design visuals, create videos, or be artistic",
+                icon: "fas fa-film",
+                value: "creative"
+            }, {
+                title: "Research essays",
+                description: "Projects involving reading, researching, and writing about a topic",
+                icon: "fas fa-book",
+                value: "humanities"
+            }, {
+                title: "Business plans",
+                description: "Projects where I create budgets, marketing plans, or business proposals",
+                icon: "fas fa-business-time",
+                value: "business"
+            }, {
+                title: "Community projects",
+                description: "Projects that involve helping others or improving the community",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "Building/models",
+                description: "Projects where I create physical objects, models, or prototypes",
+                icon: "fas fa-cube",
+                value: "stem"
+            }]
+        }, {
+            id: 12,
+            title: "Technology Interaction",
+            instruction: "How do you feel about using technology in your daily life?",
+            subinstruction: "Consider both personal and school use of technology",
+            options: [{
+                title: "Tech enthusiast",
+                description: "I love exploring new technologies and often figure them out quickly",
+                icon: "fas fa-mobile-alt",
+                value: "stem"
+            }, {
+                title: "Practical user",
+                description: "I use technology as a tool to get things done efficiently",
+                icon: "fas fa-laptop",
+                value: "business"
+            }, {
+                title: "Creative tool user",
+                description: "I enjoy using technology for creative purposes like design or music",
+                icon: "fas fa-paint-brush",
+                value: "creative"
+            }, {
+                title: "Social connector",
+                description: "I mainly use technology to connect with friends and family",
+                icon: "fas fa-comment-alt",
+                value: "humanities"
+            }, {
+                title: "Selective user",
+                description: "I use only the technology I need and prefer simpler solutions",
+                icon: "fas fa-tablet-alt",
+                value: "services"
+            }, {
+                title: "Learning resource",
+                description: "I use technology mainly for research, learning, and information",
+                icon: "fas fa-graduation-cap",
+                value: "humanities"
+            }]
+        }, {
+            id: 13,
+            title: "Role Model Inspiration",
+            instruction: "What type of people do you admire or look up to as role models?",
+            subinstruction: "These could be famous people, family members, or community leaders",
+            options: [{
+                title: "Scientists and inventors",
+                description: "People like Marie Curie, Elon Musk, or local innovators",
+                icon: "fas fa-atom",
+                value: "stem"
+            }, {
+                title: "Artists and performers",
+                description: "Musicians, actors, painters, dancers, or writers",
+                icon: "fas fa-theater-masks",
+                value: "creative"
+            }, {
+                title: "Business leaders",
+                description: "Entrepreneurs, CEOs, or successful business people",
+                icon: "fas fa-user-tie",
+                value: "business"
+            }, {
+                title: "Humanitarians and activists",
+                description: "People who help others, fight for justice, or improve communities",
+                icon: "fas fa-peace",
+                value: "services"
+            }, {
+                title: "Teachers and educators",
+                description: "People who share knowledge and help others learn and grow",
+                icon: "fas fa-chalkboard-teacher",
+                value: "humanities"
+            }, {
+                title: "Medical professionals",
+                description: "Doctors, nurses, or researchers who save lives and improve health",
+                icon: "fas fa-user-md",
+                value: "services"
+            }]
+        }, {
+            id: 14,
+            title: "Detail Orientation",
+            instruction: "How do you feel about paying attention to small details?",
+            subinstruction: "Consider tasks that require precision and accuracy",
+            options: [{
+                title: "Enjoy precision",
+                description: "I enjoy tasks that require careful attention to details and accuracy",
+                icon: "fas fa-search",
+                value: "stem"
+            }, {
+                title: "See the big picture",
+                description: "I prefer focusing on overall concepts rather than small details",
+                icon: "fas fa-binoculars",
+                value: "creative"
+            }, {
+                title: "Details when necessary",
+                description: "I pay attention to details when they're important for the task",
+                icon: "fas fa-filter",
+                value: "business"
+            }, {
+                title: "People details",
+                description: "I'm good at remembering personal details about people",
+                icon: "fas fa-user-friends",
+                value: "humanities"
+            }, {
+                title: "Practical details",
+                description: "I focus on details that have practical importance",
+                icon: "fas fa-clipboard-check",
+                value: "services"
+            }, {
+                title: "Creative details",
+                description: "I enjoy adding small creative touches to make things special",
+                icon: "fas fa-magic",
+                value: "creative"
+            }]
+        }, {
+            id: 15,
+            title: "Decision Making",
+            instruction: "When you need to make an important decision, what's your process?",
+            subinstruction: "How do you approach significant choices?",
+            options: [{
+                title: "Research and data",
+                description: "I gather as much information and data as possible before deciding",
+                icon: "fas fa-chart-pie",
+                value: "stem"
+            }, {
+                title: "Consult with others",
+                description: "I talk to people I trust to get different perspectives",
+                icon: "fas fa-comments",
+                value: "humanities"
+            }, {
+                title: "Weigh pros and cons",
+                description: "I make lists of advantages and disadvantages for each option",
+                icon: "fas fa-balance-scale",
+                value: "business"
+            }, {
+                title: "Follow intuition",
+                description: "I trust my gut feeling or instinct about what feels right",
+                icon: "fas fa-heart",
+                value: "creative"
+            }, {
+                title: "Consider practical impact",
+                description: "I think about the most practical and realistic option",
+                icon: "fas fa-cogs",
+                value: "services"
+            }, {
+                title: "Imagine outcomes",
+                description: "I visualize different possible outcomes before choosing",
+                icon: "fas fa-eye",
+                value: "creative"
+            }]
+        }, {
+            id: 16,
+            title: "Extracurricular Activities",
+            instruction: "What type of extracurricular activities interest you the most?",
+            subinstruction: "Activities outside of regular school subjects",
+            options: [{
+                title: "Science/math clubs",
+                description: "Robotics club, math olympiad, science fairs, or coding clubs",
+                icon: "fas fa-robot",
+                value: "stem"
+            }, {
+                title: "Arts and performance",
+                description: "Drama club, choir, band, art club, or dance classes",
+                icon: "fas fa-music",
+                value: "creative"
+            }, {
+                title: "Sports and fitness",
+                description: "Team sports, individual sports, gym, or outdoor activities",
+                icon: "fas fa-futbol",
+                value: "services"
+            }, {
+                title: "Debate and public speaking",
+                description: "Debate club, public speaking, or model United Nations",
+                icon: "fas fa-microphone",
+                value: "humanities"
+            }, {
+                title: "Volunteering",
+                description: "Community service, charity work, or helping at local events",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "Entrepreneurship",
+                description: "Starting small businesses, fundraising, or business competitions",
+                icon: "fas fa-store",
+                value: "business"
+            }]
+        }, {
+            id: 17,
+            title: "Reading Preferences",
+            instruction: "What type of books, articles, or content do you enjoy reading?",
+            subinstruction: "Think about what you choose to read for pleasure",
+            options: [{
+                title: "Science and technology",
+                description: "Books about space, technology, inventions, or scientific discoveries",
+                icon: "fas fa-rocket",
+                value: "stem"
+            }, {
+                title: "Fiction and novels",
+                description: "Story books, novels, fantasy, or adventure stories",
+                icon: "fas fa-book-open",
+                value: "creative"
+            }, {
+                title: "Biographies",
+                description: "Stories about real people's lives, achievements, and experiences",
+                icon: "fas fa-user",
+                value: "humanities"
+            }, {
+                title: "Business and finance",
+                description: "Books about money, business success, or economics",
+                icon: "fas fa-chart-line",
+                value: "business"
+            }, {
+                title: "How-to guides",
+                description: "Practical books about skills, DIY projects, or learning new things",
+                icon: "fas fa-book",
+                value: "services"
+            }, {
+                title: "Poetry and plays",
+                description: "Creative writing, poetry, drama scripts, or literary works",
+                icon: "fas fa-pen-nib",
+                value: "creative"
+            }]
+        }, {
+            id: 18,
+            title: "Ideal Workday",
+            instruction: "What would your ideal workday look like?",
+            subinstruction: "Imagine a day at work that you would truly enjoy",
+            options: [{
+                title: "Solving technical challenges",
+                description: "A day filled with complex problems that need logical solutions",
+                icon: "fas fa-laptop-code",
+                value: "stem"
+            }, {
+                title: "Creating and designing",
+                description: "A day spent making, designing, or expressing ideas creatively",
+                icon: "fas fa-paint-brush",
+                value: "creative"
+            }, {
+                title: "Helping people",
+                description: "A day where I directly assist or make a difference for others",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "Strategic planning",
+                description: "A day of meetings, planning, and making important decisions",
+                icon: "fas fa-chess-board",
+                value: "business"
+            }, {
+                title: "Research and writing",
+                description: "A quiet day focused on deep research, analysis, and writing",
+                icon: "fas fa-search",
+                value: "humanities"
+            }, {
+                title: "Varied activities",
+                description: "A day with different tasks, meeting different people, and variety",
+                icon: "fas fa-random",
+                value: "services"
+            }]
+        }, {
+            id: 19,
+            title: "Personal Strengths",
+            instruction: "Which of these strengths do you think describes you best?",
+            subinstruction: "We all have different natural abilities",
+            options: [{
+                title: "Logical thinking",
+                description: "I'm good at reasoning, analyzing information, and thinking critically",
+                icon: "fas fa-brain",
+                value: "stem"
+            }, {
+                title: "Creativity",
+                description: "I have a strong imagination and come up with original ideas",
+                icon: "fas fa-lightbulb",
+                value: "creative"
+            }, {
+                title: "Organization",
+                description: "I'm good at planning, organizing, and keeping things in order",
+                icon: "fas fa-clipboard-list",
+                value: "business"
+            }, {
+                title: "Empathy",
+                description: "I understand how others feel and can relate to different people",
+                icon: "fas fa-heart",
+                value: "humanities"
+            }, {
+                title: "Practical skills",
+                description: "I'm good with my hands and can fix or make things practically",
+                icon: "fas fa-tools",
+                value: "services"
+            }, {
+                title: "Communication",
+                description: "I express myself well and can explain things clearly to others",
+                icon: "fas fa-comments",
+                value: "humanities"
+            }]
+        }, {
+            id: 20,
+            title: "Future Contribution",
+            instruction: "How would you like to contribute to South Africa's future?",
+            subinstruction: "Think about making a difference in our country",
+            options: [{
+                title: "Technological innovation",
+                description: "By developing new technologies or scientific solutions for our challenges",
+                icon: "fas fa-microchip",
+                value: "stem"
+            }, {
+                title: "Economic growth",
+                description: "By building businesses, creating jobs, or improving our economy",
+                icon: "fas fa-chart-line",
+                value: "business"
+            }, {
+                title: "Cultural expression",
+                description: "Through art, music, writing, or performance that celebrates our culture",
+                icon: "fas fa-theater-masks",
+                value: "creative"
+            }, {
+                title: "Social justice",
+                description: "By helping create a fairer, more equal society for all South Africans",
+                icon: "fas fa-balance-scale",
+                value: "humanities"
+            }, {
+                title: "Community service",
+                description: "By directly helping people in need and improving local communities",
+                icon: "fas fa-hands-helping",
+                value: "services"
+            }, {
+                title: "Education",
+                description: "By teaching, mentoring, or creating educational resources for others",
+                icon: "fas fa-graduation-cap",
+                value: "humanities"
+            }]
+        }];
+
+        // State management
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let careerMatch = null;
+        let answerCounts = {
+            stem: 0,
+            business: 0,
+            humanities: 0,
+            creative: 0,
+            services: 0
+        };
+
+        // DOM elements
+        const assessmentContainer = document.getElementById('assessmentContainer');
+        const resultsSection = document.getElementById('resultsSection');
+        const progressFill = document.getElementById('progressFill');
+        const currentQuestion = document.getElementById('currentQuestion');
+        const progressPercent = document.getElementById('progressPercent');
+        const marksAnalysisBtn = document.getElementById('marksAnalysisBtn');
+        const retakeBtn = document.getElementById('retakeBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Initialize the application
+        function init() {
+            renderCurrentQuestion();
+
+            // Set up event listeners
+            retakeBtn.addEventListener('click', restartAssessment);
+            downloadBtn.addEventListener('click', downloadResults);
+
+            // Ensure the marks analysis button works properly
+            marksAnalysisBtn.addEventListener('click', function(e) {
+                // Allow the default link behavior - this will navigate to mark analysis.html
+                console.log('Navigating to mark analysis page...');
+            });
+
+            // Add event delegation for option selection
+            assessmentContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.option-card')) {
+                    const optionCard = e.target.closest('.option-card');
+                    const questionId = optionCard.dataset.questionId;
+                    const optionValue = optionCard.dataset.value;
+
+                    // Remove selected class from all options in this question
+                    document.querySelectorAll(`.option-card[data-question-id="${questionId}"]`).forEach(card => {
+                        card.classList.remove('selected');
+                    });
+
+                    // Add selected class to clicked option
+                    optionCard.classList.add('selected');
+
+                    // Store answer
+                    userAnswers[questionId] = optionValue;
+
+                    // Update answer counts
+                    updateAnswerCounts(optionValue);
+                }
+            });
+        }
+
+        // Render current question
+        function renderCurrentQuestion() {
+            const question = questionnaire[currentQuestionIndex];
+
+            let optionsHtml = '';
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[question.id] === option.value;
+                optionsHtml += `
+                    <div class="option-card ${isSelected ? 'selected' : ''}" 
+                         data-question-id="${question.id}" 
+                         data-value="${option.value}">
+                        <div class="option-title">
+                            <i class="${option.icon} option-icon"></i>
+                            ${option.title}
+                        </div>
+                        <div class="option-description">${option.description}</div>
+                    </div>
+                `;
+            });
+
+            const questionHtml = `
+                <div class="question-card active-section">
+                    <div class="question-header">
+                        <h2 class="question-title">${question.title}</h2>
+                        <p class="question-instruction">${question.instruction}</p>
+                        <p class="question-subinstruction">${question.subinstruction}</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="options-grid">
+                        ${optionsHtml}
+                    </div>
+                    <div class="navigation-buttons">
+                        ${currentQuestionIndex > 0 ? 
+                            `<button class="nav-btn nav-btn-secondary" id="prevBtn">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>` : 
+                            `<div></div>`
+                        }
+                        <button class="nav-btn" id="nextBtn">
+                            ${currentQuestionIndex < questionnaire.length - 1 ? 
+                                'Next Question <i class="fas fa-arrow-right"></i>' : 
+                                'See Results <i class="fas fa-award"></i>'
+                            }
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            assessmentContainer.innerHTML = questionHtml;
+            
+            // Update progress
+            updateProgress();
+            
+            // Add event listeners to navigation buttons
+            document.getElementById('nextBtn').addEventListener('click', goToNextQuestion);
+            if (currentQuestionIndex > 0) {
+                document.getElementById('prevBtn').addEventListener('click', goToPrevQuestion);
+            }
+        }
+        
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questionnaire.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentQuestion.textContent = currentQuestionIndex + 1;
+            progressPercent.textContent = `${Math.round(progress)}%`;
+        }
+        
+        // Update answer counts for career matching
+        function updateAnswerCounts(value) {
+            // Reset counts
+            answerCounts = { stem: 0, business: 0, humanities: 0, creative: 0, services: 0 };
+            
+            // Count all answers
+            Object.values(userAnswers).forEach(answer => {
+                if (answerCounts.hasOwnProperty(answer)) {
+                    answerCounts[answer]++;
+                }
+            });
+        }
+        
+        // Navigation functions
+        function goToNextQuestion() {
+            // Check if current question is answered
+            const currentQuestionId = questionnaire[currentQuestionIndex].id;
+            if (!userAnswers[currentQuestionId]) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+            
+            if (currentQuestionIndex < questionnaire.length - 1) {
+                currentQuestionIndex++;
+                renderCurrentQuestion();
+            } else {
+                // Last question answered - calculate results
+                calculateCareerMatch();
+                showResults();
+            }
+        }
+        
+        function goToPrevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderCurrentQuestion();
+            }
+        }
+        
+        // Calculate career match based on answers
+        function calculateCareerMatch() {
+            // Find category with highest score
+            let maxScore = 0;
+            let primaryCategory = 'stem';
+            
+            Object.entries(answerCounts).forEach(([category, score]) => {
+                if (score > maxScore) {
+                    maxScore = score;
+                    primaryCategory = category;
+                }
+            });
+            
+            careerMatch = careerCategories[primaryCategory];
+        }
+        
+        // Show results section
+        function showResults() {
+            // Hide assessment container
+            assessmentContainer.innerHTML = '';
+            document.getElementById('progressContainer').style.display = 'none';
+            
+            // Display career match
+            let careerHtml = `
+                <div class="career-match-card">
+                    <h3 class="career-match-title">Your Career Category: ${careerMatch.name}</h3>
+                    <p class="career-match-description">${careerMatch.description}</p>
+                    
+                    <h4>Potential Careers for You:</h4>
+                    <div class="career-list">
+            `;
+            
+            careerMatch.careers.forEach(career => {
+                careerHtml += `<div class="career-item">${career}</div>`;
+            });
+            
+            careerHtml += `
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('careerResults').innerHTML = careerHtml;
+            
+            // Display subject recommendations
+            let subjectsHtml = `
+                <div class="subject-category">
+                    <h4 class="category-title">Required Subjects (Essential for this career path):</h4>
+                    <div class="subject-grid">
+            `;
+            
+            careerMatch.requiredSubjects.forEach(subject => {
+                subjectsHtml += `
+                    <div class="subject-card">
+                        <div class="subject-name">${subject.name}</div>
+                        <div class="subject-type ${subject.type}">${subject.type.toUpperCase()}</div>
+                    </div>
+                `;
+            });
+            
+            subjectsHtml += `
+                    </div>
+                </div>
+                
+                <div class="subject-category">
+                    <h4 class="category-title">Recommended Subjects (Strongly advised):</h4>
+                    <div class="subject-grid">
+            `;
+            
+            careerMatch.recommendedSubjects.forEach(subject => {
+                subjectsHtml += `
+                    <div class="subject-card">
+                        <div class="subject-name">${subject.name}</div>
+                        <div class="subject-type ${subject.type}">${subject.type.toUpperCase()}</div>
+                    </div>
+                `;
+            });
+            
+            subjectsHtml += `
+                    </div>
+                </div>
+                
+                <div class="subject-category">
+                    <h4 class="category-title">Elective Subjects (Good options to consider):</h4>
+                    <div class="subject-grid">
+            `;
+            
+            careerMatch.electiveSubjects.forEach(subject => {
+                subjectsHtml += `
+                    <div class="subject-card">
+                        <div class="subject-name">${subject.name}</div>
+                        <div class="subject-type ${subject.type}">${subject.type.toUpperCase()}</div>
+                    </div>
+                `;
+            });
+            
+            subjectsHtml += `
+                    </div>
+                </div>
+                
+                <div class="note" style="margin-top: 30px; padding: 15px; background-color: #f0f7ff; border-radius: 8px;">
+                    <p><strong>Important Notes:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>All students must take <strong>Life Orientation</strong> and <strong>two languages</strong> (one must be English - either Home Language or First Additional Language)</li>
+                        <li>Subjects marked as REQUIRED are essential for university admission in these fields</li>
+                        <li>Choose subjects that interest you and align with your strengths</li>
+                        <li>Consult with your teachers and school counselor about subject availability</li>
+                        <li>Check specific university requirements for your chosen career path</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('subjectRecommendations').innerHTML = subjectsHtml;
+            
+            // Show results section
+            resultsSection.style.display = 'block';
+        }
+        
+        // Download/Print results function
+        function downloadResults() {
+            // Trigger browser print dialog
+            window.print();
+            
+            // Alternatively, you could create a PDF download option here
+            // For now, the print function works well as it maintains styling
+        }
+        
+        // Restart assessment
+        function restartAssessment() {
+            // Reset all data
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            careerMatch = null;
+            answerCounts = { stem: 0, business: 0, humanities: 0, creative: 0, services: 0 };
+            
+            // Show progress bar
+            document.getElementById('progressContainer').style.display = 'block';
+            
+            // Hide results and show first question
+            resultsSection.style.display = 'none';
+            renderCurrentQuestion();
+        }
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

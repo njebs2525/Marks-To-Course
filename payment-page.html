@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg">
+    <title>Choose Your Package - Educational Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .packages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .package-card.selected {
+            border: 3px solid #667eea;
+            transform: scale(1.02);
+        }
+
+        .package-card.bundle {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .bundle .package-badge {
+            background: #ff6b6b;
+        }
+
+        .package-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .package-grade {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .package-price {
+            font-size: 3em;
+            color: #667eea;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .bundle .package-price {
+            color: #ff6b6b;
+        }
+
+        .package-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .package-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        .package-features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .select-btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .select-btn:hover {
+            background: #5568d3;
+        }
+
+        .bundle .select-btn {
+            background: #ff6b6b;
+        }
+
+        .bundle .select-btn:hover {
+            background: #e85555;
+        }
+
+        .payment-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: none;
+            margin-top: 30px;
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        .payment-section h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .payment-method img {
+            width: 60px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .pay-btn:hover {
+            background: #5568d3;
+        }
+
+        .pay-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
+        .order-summary {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .order-summary h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-row.total {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #667eea;
+            border-bottom: none;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3em;
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .packages-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your Learning Package</h1>
+            <p>Unlock your academic potential with our comprehensive courses</p>
+        </div>
+
+        <!-- Package Selection -->
+        <div id="packageSelection">
+            <div class="packages-container">
+                <!-- Grade 9 Package -->
+                <div class="package-card" data-package="mark-to-career" data-price="499">
+                    <div class="package-badge">GRADE 9</div>
+                    <h2 class="package-title">Mark-to-Career</h2>
+                    <p class="package-grade">Grade 9 Access</p>
+                    <div class="package-price">R499</div>
+                    <ul class="package-features">
+                        <li>Complete Grade 9 Curriculum</li>
+                        <li>Career Guidance Tools</li>
+                        <li>Interactive Learning Materials</li>
+                        <li>Progress Tracking</li>
+                        <li>6 Months Access</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectPackage('mark-to-career', 499)">Select Package</button>
+                </div>
+
+                <!-- Grade 10-12 Package -->
+                <div class="package-card" data-package="mark-to-course" data-price="899">
+                    <div class="package-badge">GRADE 10-12</div>
+                    <h2 class="package-title">Mark-to-Course</h2>
+                    <p class="package-grade">Grade 10-12 Access</p>
+                    <div class="package-price">R899</div>
+                    <ul class="package-features">
+                        <li>Full Grade 10-12 Curriculum</li>
+                        <li>University Course Planning</li>
+                        <li>Advanced Study Materials</li>
+                        <li>Mock Exams & Tests</li>
+                        <li>12 Months Access</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectPackage('mark-to-course', 899)">Select Package</button>
+                </div>
+
+                <!-- Bundle Package -->
+                <div class="package-card bundle" data-package="bundle" data-price="1199">
+                    <div class="package-badge">BEST VALUE</div>
+                    <h2 class="package-title">Complete Bundle</h2>
+                    <p class="package-grade">Grade 9-12 Full Access</p>
+                    <div class="package-price">R1199</div>
+                    <ul class="package-features">
+                        <li>All Grade 9 Content</li>
+                        <li>All Grade 10-12 Content</li>
+                        <li>Lifetime Career Guidance</li>
+                        <li>Premium Study Resources</li>
+                        <li>12 Months Access</li>
+                        <li>VIP Support</li>
+                        <li>Save R199!</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectPackage('bundle', 1199)">Select Bundle</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div id="paymentSection" class="payment-section">
+            <h2>Complete Your Payment</h2>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Package:</span>
+                    <span id="selectedPackageName">-</span>
+                </div>
+                <div class="summary-row">
+                    <span>Price:</span>
+                    <span id="selectedPackagePrice">R0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="totalPrice">R0</span>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <h3 style="margin-bottom: 15px; color: #333;">Select Payment Method</h3>
+            <div class="payment-methods">
+                <div class="payment-method" data-method="payfast" onclick="selectPaymentMethod('payfast')">
+                    <div style="font-weight: bold; margin-top: 10px;">PayFast</div>
+                    <div style="font-size: 0.8em; color: #666;">South African Gateway</div>
+                </div>
+                <div class="payment-method" data-method="paystack" onclick="selectPaymentMethod('paystack')">
+                    <div style="font-weight: bold; margin-top: 10px;">Paystack</div>
+                    <div style="font-size: 0.8em; color: #666;">African Payments</div>
+                </div>
+                <div class="payment-method" data-method="stripe" onclick="selectPaymentMethod('stripe')">
+                    <div style="font-weight: bold; margin-top: 10px;">Stripe</div>
+                    <div style="font-size: 0.8em; color: #666;">International Cards</div>
+                </div>
+                <div class="payment-method" data-method="ozow" onclick="selectPaymentMethod('ozow')">
+                    <div style="font-weight: bold; margin-top: 10px;">Ozow</div>
+                    <div style="font-size: 0.8em; color: #666;">Instant EFT</div>
+                </div>
+            </div>
+
+            <!-- Payment Form -->
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="+27 XX XXX XXXX">
+                </div>
+
+                <div id="cardFields">
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 15px; color: #666;">Processing your payment...</p>
+                </div>
+
+                <button type="submit" class="pay-btn" id="payBtn">Complete Payment</button>
+                <button type="button" class="pay-btn back-btn" onclick="backToPackages()">Back to Packages</button>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <div class="success-icon">✓</div>
+            <h2 style="color: #4caf50; margin-bottom: 15px;">Payment Successful!</h2>
+            <p style="color: #666; margin-bottom: 20px;">Thank you for your purchase. You will receive a confirmation email shortly.</p>
+            <p style="color: #333; font-weight: bold; margin-bottom: 30px;">Transaction ID: <span id="transactionId"></span></p>
+            <button class="pay-btn" onclick="window.location.href='1 NextGen NTS.html'" style="background: #4caf50;">Back to Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedPackage = null;
+        let selectedPrice = 0;
+        let selectedPaymentMethod = null;
+
+        // Package Selection
+        function selectPackage(packageName, price) {
+            selectedPackage = packageName;
+            selectedPrice = price;
+
+            // Update visual selection
+            document.querySelectorAll('.package-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.package-card').classList.add('selected');
+
+            // Update order summary
+            const packageNames = {
+                'mark-to-career': 'Mark-to-Career (Grade 9)',
+                'mark-to-course': 'Mark-to-Course (Grade 10-12)',
+                'bundle': 'Complete Bundle (Grade 9-12)'
+            };
+
+            document.getElementById('selectedPackageName').textContent = packageNames[packageName];
+            document.getElementById('selectedPackagePrice').textContent = `R${price}`;
+            document.getElementById('totalPrice').textContent = `R${price}`;
+
+            // Show payment section
+            document.getElementById('packageSelection').style.display = 'none';
+            document.getElementById('paymentSection').classList.add('active');
+        }
+
+        // Payment Method Selection
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.target.closest('.payment-method').classList.add('selected');
+
+            // Show/hide card fields based on payment method
+            const cardFields = document.getElementById('cardFields');
+            if (method === 'ozow') {
+                cardFields.style.display = 'none';
+                document.getElementById('cardNumber').removeAttribute('required');
+                document.getElementById('expiryDate').removeAttribute('required');
+                document.getElementById('cvv').removeAttribute('required');
+            } else {
+                cardFields.style.display = 'block';
+                document.getElementById('cardNumber').setAttribute('required', 'required');
+                document.getElementById('expiryDate').setAttribute('required', 'required');
+                document.getElementById('cvv').setAttribute('required', 'required');
+            }
+        }
+
+        // Back to Packages
+        function backToPackages() {
+            document.getElementById('paymentSection').classList.remove('active');
+            document.getElementById('packageSelection').style.display = 'block';
+        }
+
+        // Card Number Formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry Date Formatting
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Payment Form Submission
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loadingSpinner').classList.add('active');
+            document.getElementById('payBtn').disabled = true;
+
+            // Get form data
+            const formData = {
+                package: selectedPackage,
+                amount: selectedPrice,
+                paymentMethod: selectedPaymentMethod,
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                cardNumber: document.getElementById('cardNumber').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                cvv: document.getElementById('cvv').value
+            };
+
+            try {
+                // Process payment based on selected method
+                let result;
+                switch(selectedPaymentMethod) {
+                    case 'payfast':
+                        result = await processPayFast(formData);
+                        break;
+                    case 'paystack':
+                        result = await processPaystack(formData);
+                        break;
+                    case 'stripe':
+                        result = await processStripe(formData);
+                        break;
+                    case 'ozow':
+                        result = await processOzow(formData);
+                        break;
+                }
+
+                // Hide loading
+                document.getElementById('loadingSpinner').classList.remove('active');
+                document.getElementById('payBtn').disabled = false;
+
+                if (result.success) {
+                    // Show success message
+                    document.getElementById('paymentSection').classList.remove('active');
+                    document.getElementById('successMessage').classList.add('active');
+                    document.getElementById('transactionId').textContent = result.transactionId;
+                } else {
+                    alert('Payment failed: ' + result.message);
+                }
+            } catch (error) {
+                document.getElementById('loadingSpinner').classList.remove('active');
+                document.getElementById('payBtn').disabled = false;
+                alert('An error occurred during payment. Please try again.');
+                console.error('Payment error:', error);
+            }
+        });
+
+        // PayFast Integration
+        async function processPayFast(data) {
+            // PayFast API integration
+            const response = await fetch('https://api.payfast.co.za/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'merchant-id': 'YOUR_PAYFAST_MERCHANT_ID',
+                    'merchant-key': 'YOUR_PAYFAST_MERCHANT_KEY'
+                },
+                body: JSON.stringify({
+                    merchant_id: 'YOUR_MERCHANT_ID',
+                    merchant_key: 'YOUR_MERCHANT_KEY',
+                    amount: data.amount,
+                    item_name: data.package,
+                    email_address: data.email,
+                    name_first: data.fullName.split(' ')[0],
+                    name_last: data.fullName.split(' ').slice(1).join(' '),
+                    cell_number: data.phone
+                })
+            });
+
+            // Simulate successful payment for demo
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return {
+                success: true,
+                transactionId: 'PF' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+        }
+
+        // Paystack Integration
+        async function processPaystack(data) {
+            // Paystack API integration
+            const response = await fetch('https://api.paystack.co/transaction/initialize', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer YOUR_PAYSTACK_SECRET_KEY',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    amount: data.amount * 100, // Paystack uses kobo
+                    currency: 'ZAR',
+                    metadata: {
+                        package: data.package,
+                        full_name: data.fullName
+                    }
+                })
+            });
+
+            // Simulate successful payment for demo
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return {
+                success: true,
+                transactionId: 'PS' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+        }
+
+        // Stripe Integration
+        async function processStripe(data) {
+            // Stripe API integration
+            const response = await fetch('https://api.stripe.com/v1/payment_intents', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer YOUR_STRIPE_SECRET_KEY',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    amount: data.amount * 100, // Stripe uses cents
+                    currency: 'zar',
+                    'payment_method_data[type]': 'card',
+                    'payment_method_data[card][number]': data.cardNumber.replace(/\s/g, ''),
+                    'payment_method_data[card][exp_month]': data.expiryDate.split('/')[0],
+                    'payment_method_data[card][exp_year]': '20' + data.expiryDate.split('/')[1],
+                    'payment_method_data[card][cvc]': data.cvv,
+                    confirm: 'true'
+                })
+            });
+
+            // Simulate successful payment for demo
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return {
+                success: true,
+                transactionId: 'ST' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+        }
+
+        // Ozow Integration
+        async function processOzow(data) {
+            // Ozow API integration
+            const response = await fetch('https://api.ozow.com/postpaymentrequest', {
+                method: 'POST',
+                headers: {
+                    'ApiKey': 'YOUR_OZOW_API_KEY',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    SiteCode: 'YOUR_SITE_CODE',
+                    CountryCode: 'ZA',
+                    CurrencyCode: 'ZAR',
+                    Amount: data.amount,
+                    TransactionReference: 'TXN' + Date.now(),
+                    BankReference: data.package,
+                    Customer: data.fullName,
+                    Email: data.email,
+                    Mobile: data.phone
+                })
+            });
+
+            // Simulate successful payment for demo
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return {
+                success: true,
+                transactionId: 'OZ' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+        }
+    </script>
+</body>
+</html>

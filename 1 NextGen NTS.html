@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg">
+    <title>Next Generation New Tier Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Header Styles */
+        
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 16px 34px;
+            background: linear-gradient(90deg, #071028 0%, #072043 100%);
+            color: #ffffff;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(45deg, #0f172a, #1e3a8a);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+            padding: 6px;
+            box-shadow: 0 6px 14px rgba(2, 6, 23, 0.5);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 20px;
+            color: #fff;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            font-style: italic;
+            margin-top: 2px;
+        }
+        /* nav/button group */
+        
+        .nav-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.9rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform .16s ease, box-shadow .16s ease, opacity .12s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        
+        .btn-neutral {
+            background: rgba(255, 255, 255, 0.06);
+            color: #e6eef8;
+            backdrop-filter: blur(3px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12);
+            border-radius: 999px;
+            padding: 0.5rem 1.05rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
+            opacity: 0.98;
+        }
+        /* Main Content */
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+            width: 100%;
+        }
+        
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        /* Options Grid - UPDATED TO SINGLE ROW */
+        
+        .options-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 50px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .option-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            width: 300px;
+            /* Reduced width to fit 3 in a row */
+            flex-shrink: 0;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-image {
+            height: 160px;
+            /* Reduced height */
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .option-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+            /* Reduced padding */
+            text-align: center;
+        }
+        
+        .card-content h3 {
+            font-size: 20px;
+            /* Reduced font size */
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        
+        .card-content p {
+            color: #666;
+            font-size: 14px;
+            /* Reduced font size */
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .target-audience {
+            display: inline-block;
+            background-color: #e8eaf6;
+            color: #3949ab;
+            padding: 4px 12px;
+            /* Reduced padding */
+            border-radius: 20px;
+            font-size: 13px;
+            /* Reduced font size */
+            font-weight: 600;
+        }
+        /* Footer */
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-content p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .developer {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        /* Modal for Contact Form */
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal h3 {
+            color: #1a237e;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #1a237e, #3949ab);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 1100px) {
+            .option-card {
+                width: 280px;
+                /* Slightly smaller for medium screens */
+            }
+            .options-grid {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .options-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .option-card {
+                width: 350px;
+                /* Wider for single column layout */
+            }
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero h2 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .option-card {
+                width: 320px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .option-card {
+                width: 100%;
+                max-width: 320px;
+            }
+            .logo-text h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo-container">
+            <div class="logo-img">
+                NextGen<br>NTS
+            </div>
+            <div class="logo-text">
+                <h1>Next Generation New Tier Systems</h1>
+                <p>Empowering Educational Pathways</p>
+            </div>
+        </div>
+        <nav class="nav-buttons" aria-label="Primary actions">
+            <a href="payment-page.html" class="btn btn-neutral">Pricing</a>
+            <a href="contact us.html" class="btn btn-primary" id="contactBtn">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="hero">
+            <h2>Choose Your Educational Pathway</h2>
+            <p>Select from our three specialized platforms designed to guide students at different stages of their academic journey.</p>
+        </div>
+
+        <div class="options-grid">
+            <!-- Mark-To-Career Card -->
+            <div class="option-card" onclick="window.location.href='Index grade 9.html'">
+                <div class="card-image">
+                    <img src="WhatsApp Image 2026-01-29 at 18.58.41.jpeg" alt="Mark-To-Career Platform">
+                </div>
+                <div class="card-content">
+                    <h3>Mark-To-Career</h3>
+                    <p>Discover career paths based on your academic performance and interests. Perfect for students exploring future possibilities.</p>
+                    <div class="target-audience">Grade 9's</div>
+                </div>
+            </div>
+
+            <!-- Mark-To-Course Card -->
+            <div class="option-card" onclick="window.location.href='Index Uni.html'">
+                <div class="card-image">
+                    <img src="WhatsApp Image 2026-01-29 at 18.58.40.jpeg" alt="Mark-To-Course Platform">
+                </div>
+                <div class="card-content">
+                    <h3>Mark-To-Course</h3>
+                    <p>Find the perfect university courses that match your academic strengths and career aspirations.</p>
+                    <div class="target-audience">University Applicants</div>
+                </div>
+            </div>
+
+            <!-- Mark-To-TVET Card -->
+            <div class="option-card" onclick="window.location.href='Index tvet.html'">
+                <div class="card-image">
+                    <img src="WhatsApp Image 2026-01-29 at 19.11.40.jpeg" alt="Mark-To-TVET Platform">
+                </div>
+                <div class="card-content">
+                    <h3>Mark-To-TVET</h3>
+                    <p>Explore Technical and Vocational Education and Training opportunities aligned with your skills and interests.</p>
+                    <div class="target-audience">TVET Applicants</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Mark-To-Course / Njabulo Mazibuko 2025. All right reserved.</p>
+            <p class="developer">Developed by NextGen NTS</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal (Removed incorrect input element that was outside modal) -->
+
+    <script>
+        // Card click effects
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+
+</html>"

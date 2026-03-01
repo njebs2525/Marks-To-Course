@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg">
+    <title>NextGen NTS - Business Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            color: #a3d0ff;
+            margin-bottom: 50px;
+            font-size: 1.2em;
+        }
+        /* Business Card Container */
+        
+        .card-container {
+            perspective: 1000px;
+            width: 400px;
+            height: 250px;
+            margin: 0 auto 40px;
+            cursor: pointer;
+        }
+        
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            overflow: hidden;
+            /* Prevent content from overflowing */
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #ffffff, #f8f9fa);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-back {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            transform: rotateY(180deg);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Front Side - Logo */
+        
+        .logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .company-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Changed to cover to fill the space */
+            border-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0056b3, #28a745);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .click-instruction {
+            position: absolute;
+            bottom: 15px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-style: italic;
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+        /* Back Side - Contact Details */
+        
+        .contact-details {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            /* Reduced gap to fit better */
+            text-align: center;
+            overflow-y: auto;
+            /* Add scroll if content overflows */
+            padding: 5px;
+        }
+        
+        .contact-details::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .contact-details::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .contact-details::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .company-name-back {
+            color: #28a745;
+            font-size: 1.6em;
+            /* Slightly reduced */
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Reduced gap */
+            padding: 5px 0;
+            /* Reduced padding */
+        }
+        
+        .contact-icon {
+            min-width: 25px;
+            /* Reduced */
+            height: 25px;
+            /* Reduced */
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #28a745;
+            font-size: 1em;
+            /* Reduced */
+        }
+        
+        .contact-text {
+            text-align: left;
+            flex: 1;
+            overflow: hidden;
+            /* Prevent text overflow */
+        }
+        
+        .contact-label {
+            font-size: 0.75em;
+            /* Reduced */
+            color: #a3d0ff;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .contact-value {
+            font-size: 0.95em;
+            /* Reduced */
+            font-weight: 500;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .email-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .email-link:hover {
+            color: #28a745;
+            text-decoration: underline;
+        }
+        /* Navigation Buttons */
+        
+        .navigation {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav-button {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button.primary {
+            background: #28a745;
+            border-color: #28a745;
+        }
+        
+        .nav-button.primary:hover {
+            background: #218838;
+            border-color: #218838;
+        }
+        /* Flip Animation Hint */
+        
+        .flip-hint {
+            color: #a3d0ff;
+            margin-top: 20px;
+            font-style: italic;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .card-container {
+                width: 350px;
+                height: 220px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .company-name-back {
+                font-size: 1.4em;
+            }
+            .contact-icon {
+                min-width: 22px;
+                height: 22px;
+                font-size: 0.9em;
+            }
+            .contact-label {
+                font-size: 0.7em;
+            }
+            .contact-value {
+                font-size: 0.85em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card-container {
+                width: 320px;
+                height: 200px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .card-front,
+            .card-back {
+                padding: 20px;
+            }
+            .company-name-back {
+                font-size: 1.3em;
+            }
+            .contact-icon {
+                min-width: 20px;
+                height: 20px;
+                font-size: 0.8em;
+            }
+            .contact-label {
+                font-size: 0.65em;
+            }
+            .contact-value {
+                font-size: 0.8em;
+            }
+            .nav-button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>NextGen NTS Business Card</h1>
+        <p class="subtitle">YOUR COMPASS FOR A CLEAR DIRECTION</p>
+
+        <div class="card-container" id="cardContainer">
+            <div class="card" id="businessCard">
+                <!-- Front Side with Logo -->
+                <div class="card-front">
+                    <div class="logo-container">
+                        <!-- Replace "company-logo.jpg" with your actual logo filename -->
+                        <img src="logo business card.png" alt="NextGen NTS Logo" class="company-logo" onerror="this.style.display='none'; document.querySelector('.logo-placeholder').style.display='flex';">
+                        <div class="logo-placeholder" style="display: none;">
+                            NGN<br>NTS
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Back Side with Contact Details -->
+                <div class="card-back">
+                    <div class="contact-details">
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <div class="contact-label">Phone Number</div>
+                                <div class="contact-value">064 054 4020</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <div class="contact-label">Email Address</div>
+                                <a href="mailto:nexttiersystems@gmail.com" class="contact-value email-link">
+                                    nexttiersystems@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕐</div>
+                            <div class="contact-text">
+                                <div class="contact-label">Office Hours</div>
+                                <div class="contact-value">11:00 AM - 17:00 PM (Mon-Fri)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-hint">Click the card to flip it and see contact details</div>
+
+        <div class="navigation">
+            <a href="1 NextGen NTS.html" class="nav-button primary">Back to Home Page</a>
+        </div>
+    </div>
+
+    <script>
+        // Card flip functionality
+        const cardContainer = document.getElementById('cardContainer');
+        const businessCard = document.getElementById('businessCard');
+
+        cardContainer.addEventListener('click', function() {
+            businessCard.classList.toggle('flipped');
+        });
+
+        // Auto-flip on page load (optional)
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                businessCard.classList.add('flipped');
+                setTimeout(() => {
+                    businessCard.classList.remove('flipped');
+                }, 3000);
+            }, 1000);
+        });
+
+        // Add keyboard support for flipping
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' || event.code === 'Enter') {
+                businessCard.classList.toggle('flipped');
+                event.preventDefault();
+            }
+        });
+
+        // Handle logo loading error
+        document.querySelector('.company-logo').addEventListener('error', function() {
+            this.style.display = 'none';
+            document.querySelector('.logo-placeholder').style.display = 'flex';
+        });
+    </script>
+</body>
+
+</html>

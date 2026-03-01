@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.jpg">
+    <title>Marks Analysis & Improvement Plan | NextGen NTS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .analysis-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-title {
+            color: #1a3a5f;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .marks-summary {
+            margin-bottom: 40px;
+        }
+        
+        .marks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .mark-card {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border-top: 4px solid #2c5282;
+            transition: transform 0.3s ease;
+        }
+        
+        .mark-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .subject-name {
+            font-weight: 700;
+            color: #1a3a5f;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .mark-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .mark-status {
+            font-size: 1rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .excellent {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .good {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .needs-improvement {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .poor {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .improvement-plan {
+            margin-top: 40px;
+        }
+        
+        .career-path {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 8px solid #2c5282;
+        }
+        
+        .career-path-title {
+            color: #1a3a5f;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .improvement-list {
+            margin-top: 25px;
+        }
+        
+        .improvement-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #2c5282;
+        }
+        
+        .subject-improvement {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .subject-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .subject-name-improvement {
+            font-weight: 700;
+            color: #1a3a5f;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .subject-importance {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .marks-comparison {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .current-mark,
+        .target-mark {
+            text-align: center;
+        }
+        
+        .mark-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .current-value,
+        .target-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 8px;
+        }
+        
+        .current-value {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .target-value {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .arrow {
+            font-size: 1.5rem;
+            color: #2c5282;
+        }
+        
+        .improvement-required {
+            font-size: 1rem;
+            color: #1a3a5f;
+            font-weight: 600;
+            margin-top: 10px;
+            background-color: #e6f0ff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .action-plan {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #f0f7ff;
+            border-radius: 12px;
+        }
+        
+        .action-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .action-step {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-icon {
+            font-size: 2rem;
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-weight: 700;
+            color: #1a3a5f;
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .grade10-subjects {
+            margin-top: 40px;
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .subject-grade10 {
+            background-color: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .subject-grade10.required {
+            border-top: 4px solid #28a745;
+        }
+        
+        .subject-grade10.recommended {
+            border-top: 4px solid #17a2b8;
+        }
+        
+        .subject-grade10.elective {
+            border-top: 4px solid #6c757d;
+        }
+        
+        .print-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2c5282 0%, #1a3a5f 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(44, 82, 130, 0.3);
+        }
+        
+        .footer {
+            background-color: #1a3a5f;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #e9ecef;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+            color: #b0b7c3;
+        }
+        
+        .contact-info {
+            margin-top: 10px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            color: #4a9eff;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .analysis-section {
+                padding: 25px 20px;
+            }
+            .marks-grid,
+            .subjects-grid,
+            .action-steps {
+                grid-template-columns: 1fr;
+            }
+            .subject-improvement {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .marks-comparison {
+                margin-top: 15px;
+            }
+        }
+        
+        @media print {
+            .header-section {
+                background: #1a3a5f !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .back-btn,
+            .print-btn {
+                display: none !important;
+            }
+            .analysis-section {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <h1>Your Marks Analysis & Improvement Plan</h1>
+            <p class="tagline">Personalized recommendations to help you reach your career goals</p>
+            <a href="grade 9.html#career-discovery-results" class="back-btn"></a>
+                <i class="fas fa-arrow-left"></i> Back to Career Report
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Analysis Section -->
+    <div class="container">
+        <div class="analysis-section">
+            <h2 class="section-title">Your Current Marks Summary</h2>
+            <div class="marks-summary">
+                <p style="margin-bottom: 20px; color: #555;">Based on the marks you entered, here's your current academic standing:</p>
+
+                <div class="marks-grid" id="marksGrid">
+                    <!-- Marks will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="improvement-plan">
+                <h2 class="section-title">Personalized Improvement Plan</h2>
+
+                <div class="career-path">
+                    <h3 class="career-path-title">Career Path: STEM (Science, Technology, Engineering, Mathematics)</h3>
+                    <p>Based on your assessment results, you show strong aptitude for STEM fields. To pursue careers in IT, Engineering, or Sciences, you need to focus on specific subject improvements.</p>
+
+                    <div class="improvement-list" id="improvementList">
+                        <!-- Improvement items will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <div class="action-plan">
+                    <h3 style="color: #1a3a5f; margin-bottom: 20px;">Your Action Plan</h3>
+                    <p style="margin-bottom: 20px; color: #555;">Follow these steps to improve your marks and secure your future career path:</p>
+
+                    <div class="action-steps">
+                        <div class="action-step">
+                            <div class="step-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="step-title">1. Focused Study Sessions</div>
+                            <div class="step-description">Dedicate 45-60 minutes daily to your weak subjects. Use active recall and spaced repetition techniques.</div>
+                        </div>
+
+                        <div class="action-step">
+                            <div class="step-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="step-title">2. Seek Extra Help</div>
+                            <div class="step-description">Ask teachers for clarification, join study groups, or consider tutoring for subjects needing improvement.</div>
+                        </div>
+
+                        <div class="action-step">
+                            <div class="step-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="step-title">3. Past Exam Practice</div>
+                            <div class="step-description">Regularly practice with past exam papers to identify patterns and improve exam technique.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grade10-subjects">
+                    <h3 class="section-title">Grade 10 Subject Requirements for Your Career Path</h3>
+                    <p style="margin-bottom: 20px; color: #555;">To pursue STEM careers in Grade 10 and beyond, you should consider these subject combinations:</p>
+
+                    <div class="subjects-grid">
+                        <div class="subject-grade10 required">
+                            <div class="subject-name">Mathematics</div>
+                            <div class="subject-type">REQUIRED</div>
+                        </div>
+
+                        <div class="subject-grade10 required">
+                            <div class="subject-name">Physical Sciences</div>
+                            <div class="subject-type">REQUIRED</div>
+                        </div>
+
+                        <div class="subject-grade10 required">
+                            <div class="subject-name">Life Sciences</div>
+                            <div class="subject-type">REQUIRED</div>
+                        </div>
+
+                        <div class="subject-grade10 recommended">
+                            <div class="subject-name">Information Technology</div>
+                            <div class="subject-type">RECOMMENDED</div>
+                        </div>
+
+                        <div class="subject-grade10 recommended">
+                            <div class="subject-name">Engineering Graphics & Design</div>
+                            <div class="subject-type">RECOMMENDED</div>
+                        </div>
+
+                        <div class="subject-grade10 elective">
+                            <div class="subject-name">Geography</div>
+                            <div class="subject-type">ELECTIVE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="print-btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Your Analysis
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>NextGen NTS</h3>
+                <p>A comprehensive career guidance platform for South African students.</p>
+                <p>Helping Grade 9 students make informed subject choices for their future careers.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Need Help Improving?</h3>
+                <p>Contact NextGen NTS for tutoring recommendations and study resources.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-clock"></i> Office Hours: Mon-Fri: 11:00AM-17:00PM</p>
+                    <p><i class="fas fa-phone"></i> Phone: 064 054 4020</p>
+                    <p><i class="fas fa-envelope"></i> Email: nexttiersystems@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Convert stored marks from localStorage to the format needed for analysis
+        function getMarksFromStorage() {
+            const userData = JSON.parse(localStorage.getItem('matricUserData')) || {
+                subjects: []
+            };
+
+            // Convert the subjects array to marks array format
+            return userData.subjects.map(subject => ({
+                subject: subject.name,
+                mark: parseInt(subject.mark),
+                target: 70, // Default target for recommendations
+                importance: "Important"
+            }));
+        }
+
+        // Career path requirements based on assessment results
+        const careerRequirements = {
+            stem: {
+                name: "STEM Careers",
+                requiredSubjects: [{
+                    name: "Mathematics",
+                    minMark: 65,
+                    reason: "Required for Engineering, IT, and Science degrees at university"
+                }, {
+                    name: "Physical Sciences",
+                    minMark: 70,
+                    reason: "Essential for Physics, Chemistry, and Engineering programs"
+                }, {
+                    name: "Life Sciences",
+                    minMark: 70,
+                    reason: "Required for Medical, Biological, and Health Science fields"
+                }],
+                recommendedSubjects: [{
+                    name: "Information Technology",
+                    minMark: 65,
+                    reason: "Valuable for Computer Science and IT careers"
+                }, {
+                    name: "English",
+                    minMark: 60,
+                    reason: "Important for university admission and communication skills"
+                }]
+            },
+            business: {
+                name: "Business & Finance Careers",
+                requiredSubjects: [{
+                    name: "Mathematics",
+                    minMark: 60,
+                    reason: "Required for Accounting, Economics, and Business degrees"
+                }, {
+                    name: "Accounting",
+                    minMark: 65,
+                    reason: "Essential for Commerce and Finance programs"
+                }, {
+                    name: "English",
+                    minMark: 60,
+                    reason: "Important for communication in business environments"
+                }]
+            },
+            humanities: {
+                name: "Humanities & Social Sciences",
+                requiredSubjects: [{
+                    name: "English",
+                    minMark: 70,
+                    reason: "Critical for Law, Journalism, and Social Sciences"
+                }, {
+                    name: "History",
+                    minMark: 65,
+                    reason: "Important for Humanities and Social Science degrees"
+                }, {
+                    name: "Life Sciences",
+                    minMark: 60,
+                    reason: "Useful for Psychology and Social Work"
+                }]
+            }
+        };
+
+        // Initialize the page
+        function initMarksAnalysis() {
+            // Retrieve marks from localStorage that were entered in index.html
+            let userMarks = getMarksFromStorage();
+
+            // If no marks found, show message
+            if (userMarks.length === 0) {
+                document.getElementById('marksGrid').innerHTML = '<p style="color: #dc3545; font-size: 1.1rem; text-align: center; padding: 30px; grid-column: 1 / -1;">No marks found. Please enter your marks in the previous page first.</p>';
+                return;
+            }
+
+            // Try to retrieve career path from localStorage
+            let careerPath = localStorage.getItem('careerPath') || 'stem';
+
+            // Display marks summary
+            displayMarksSummary(userMarks);
+
+            // Display improvement recommendations based on career path
+            displayImprovementRecommendations(userMarks, careerPath);
+        }
+
+        // Display marks summary
+        function displayMarksSummary(marks) {
+            const marksGrid = document.getElementById('marksGrid');
+            marksGrid.innerHTML = '';
+
+            marks.forEach(mark => {
+                const statusClass = getStatusClass(mark.mark);
+                const statusText = getStatusText(mark.mark);
+
+                const markCard = document.createElement('div');
+                markCard.className = 'mark-card';
+                markCard.innerHTML = `
+                    <div class="subject-name">${mark.subject}</div>
+                    <div class="mark-value">${mark.mark}%</div>
+                    <div class="mark-status ${statusClass}">${statusText}</div>
+                `;
+
+                marksGrid.appendChild(markCard);
+            });
+        }
+
+        // Display improvement recommendations
+        function displayImprovementRecommendations(marks, careerPath) {
+            const improvementList = document.getElementById('improvementList');
+            improvementList.innerHTML = '';
+
+            // Get requirements for the selected career path
+            const requirements = careerRequirements[careerPath];
+
+            if (!requirements) return;
+
+            // Check each subject against requirements
+            marks.forEach(mark => {
+                // Find if this subject has a requirement for the career path
+                const requirement = [...requirements.requiredSubjects, ...(requirements.recommendedSubjects || [])]
+                    .find(req => req.name.toLowerCase().includes(mark.subject.toLowerCase()) ||
+                        mark.subject.toLowerCase().includes(req.name.toLowerCase()));
+
+                if (requirement && mark.mark < requirement.minMark) {
+                    const improvementItem = document.createElement('div');
+                    improvementItem.className = 'improvement-item';
+                    improvementItem.innerHTML = `
+                        <div class="subject-improvement">
+                            <div class="subject-info">
+                                <div class="subject-name-improvement">${mark.subject}</div>
+                                <div class="subject-importance">${requirement.reason}</div>
+                            </div>
+                            <div class="marks-comparison">
+                                <div class="current-mark">
+                                    <div class="mark-label">Current</div>
+                                    <div class="current-value">${mark.mark}%</div>
+                                </div>
+                                <div class="arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="target-mark">
+                                    <div class="mark-label">Target</div>
+                                    <div class="target-value">${requirement.minMark}%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="improvement-required">
+                            Improve by ${requirement.minMark - mark.mark}% to meet requirement
+                        </div>
+                    `;
+
+                    improvementList.appendChild(improvementItem);
+                }
+            });
+
+            // If no improvements needed, show success message
+            if (improvementList.children.length === 0) {
+                improvementList.innerHTML = `
+                    <div class="improvement-item" style="border-left-color: #28a745;">
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: #28a745; margin-bottom: 15px;"></i>
+                            <h3 style="color: #155724; margin-bottom: 10px;">Excellent Work!</h3>
+                            <p style="color: #555;">Your current marks meet the requirements for ${requirements.name} careers. Keep up the good work!</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Helper function to determine status class based on mark
+        function getStatusClass(mark) {
+            if (mark >= 75) return 'excellent';
+            if (mark >= 65) return 'good';
+            if (mark >= 50) return 'needs-improvement';
+            return 'poor';
+        }
+
+        // Helper function to determine status text based on mark
+        function getStatusText(mark) {
+            if (mark >= 75) return 'Excellent';
+            if (mark >= 65) return 'Good';
+            if (mark >= 50) return 'Needs Improvement';
+            return 'Needs Major Improvement';
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initMarksAnalysis);
+    </script>
+</body>
+
+</html>
